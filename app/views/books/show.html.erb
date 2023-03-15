@@ -17,12 +17,40 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          <td>コメント数:<%= @book.post_comments.count %></td>
           <% if current_user == @book.user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', book_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
         </tr>
       </table>
+      <table class="table table-borderless">
+        <% @book.post_comments.each do |post_comment| %>
+        <tr>
+           <td>
+            <%= link_to user_path(post_comment.user) do %>
+              <%= image_tag post_comment.user.get_profile_image, size:'50x50' %>
+              <br>
+              <%= post_comment.user.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= post_comment.comment %>
+          </td>
+          <td>
+            <% if post_comment.user == current_user %>
+              <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class:"btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="form-group">
+        <%= form_with model: [@book, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', class:"form-control", placeholder: "コメントをここに" %>
+          <%= f.submit class:"btn btn-secondary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
