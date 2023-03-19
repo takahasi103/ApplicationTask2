@@ -18,17 +18,7 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
           <td>
-            <% if @book.favorited_by?(current_user) %>
-              <%= link_to book_favorites_path(@book), method: :delete, class:"text-danger" do %>
-                <i class="fa fa-heart"></i>
-                <%= @book.favorites.count %>
-              <% end %>
-            <% else %>
-              <%= link_to book_favorites_path(@book), method: :post do %>
-                <i class="fa fa-heart"></i>
-                <%= @book.favorites.count %>
-              <% end %>
-            <% end %>
+            <%= render 'favorites/favoried-btn', book: @book %>
           </td>
           <td>コメント数:<%= @book.post_comments.count %></td>
           <% if current_user == @book.user %>
@@ -58,12 +48,7 @@
         </tr>
         <% end %>
       </table>
-      <div class="form-group">
-        <%= form_with model: [@book, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', class:"form-control", placeholder: "コメントをここに" %>
-          <%= f.submit class:"btn btn-secondary" %>
-        <% end %>
-      </div>
+      <%= render 'post_comments/post_comment-form', book: @book, post_comment: @post_comment %>
     </div>
   </div>
 </div>
