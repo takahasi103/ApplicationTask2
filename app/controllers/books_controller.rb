@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    @books = week_book_favorited
     @book = Book.new
   end
 
@@ -57,5 +57,13 @@ class BooksController < ApplicationController
       redirect_to books_path
     end
   end
+  
+  def week_book_favorited
+    Book.includes(:favorited_books).
+      sort {|a,b|
+        b.favorited_books.includes(:favorites).where(created_at: Time.current.all_week).size <=>
+        a.favorited_books.includes(:favorites).where(created_at: Time.current.all_week).size
+      }
+  end 
 
 end
