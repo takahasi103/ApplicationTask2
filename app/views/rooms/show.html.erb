@@ -1,0 +1,33 @@
+<h2>
+  <%= @chat_user.user.name %>
+  さんとのチャット
+</h2>
+<hr>
+<div class="chats">
+  <div class="chat">
+    <% if @direct_messages.present? %>
+      <% @direct_messages.each do |message| %>
+        <div class="chat-box">
+          <div class="chat-face">
+            <%= image_tag message.user.get_profile_image, size:'50x50', class:'user-image' %>
+            <%= message.user.name %>
+          </div>
+          <div class="chat-hukidashi">
+            <strong>
+              <%= message.body %>
+            </strong>
+            <br>
+            <%= message.created_at.strftime("%y-%m-%d %H:%M") %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="posts">
+    <%= form_with model: @direct_message do |f| %>
+      <%= f.text_field :body, placeholder: "メッセージを入力してください", size: 70, class:'form-text-field' %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "送信", class:'form-submit' %>
+    <% end %>
+  </div>
+</div>
