@@ -8,9 +8,14 @@
     <% if @direct_messages.present? %>
       <% @direct_messages.each do |message| %>
         <% if message.user == current_user %>
-          <div class="row">
-            <div class="col-9 text-right">
-              <strong class="bg-primary rounded-pill p-2">
+          <div class="d-flex flex-row-reverse bd-highlight align-items-center">
+            <div class="p-2 bd-highlight">
+              <%= image_tag message.user.get_profile_image, size:'50x50' %>
+              <br>
+              <%= message.user.name %>
+            </div>
+            <div class="p-2 bd-highlight text-right">
+              <strong class="bg-info rounded-pill p-2">
                 <%= message.body %>
               </strong>
               <br>
@@ -18,20 +23,15 @@
                 <%= message.created_at.strftime("%y-%m-%d %H:%M") %>
               </div>
             </div>
-            <div class="col-2">
-              <%= image_tag message.user.get_profile_image, size:'50x50' %>
-              <br>
-              <%= message.user.name %>
-            </div>
           </div>
         <% else %>
-          <div class="row">
-            <div class="col-2 text-right">
+          <div class="d-flex flex-row bd-highlight align-items-center">
+            <div class="p-2 bd-highlight">
               <%= image_tag message.user.get_profile_image, size:'50x50' %>
               <br>
               <%= message.user.name %>
             </div>
-            <div class="col-9">
+            <div class="p-2 bd-highlight">
               <strong class="text-left border border-dark rounded-pill p-2">
                 <%= message.body %>
               </strong>
@@ -45,7 +45,7 @@
       <% end %>
     <% end %>
   </div>
-  <div class="posts">
+  <div class="d-flex flex-row-reverse">
     <%= form_with model: @direct_message do |f| %>
       <%= f.text_field :body, placeholder: "メッセージを入力してください", size: 70, class:'form-text-field' %>
       <%= f.hidden_field :room_id, value: @room.id %>
