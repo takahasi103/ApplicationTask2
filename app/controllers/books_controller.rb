@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
+  
+  impressionist :action => [:show]
 
   def show
     @book = Book.find(params[:id])
@@ -7,6 +9,7 @@ class BooksController < ApplicationController
     @user = @book.user
     @book_new = Book.new
     @post_comment = PostComment.new
+    impressionist(@book, nil, unique: [:session_hash])
   end
 
   def index
