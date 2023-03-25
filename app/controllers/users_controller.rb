@@ -20,6 +20,10 @@ class UsersController < ApplicationController
       end
     end
     @books = @user.books
+    @today_book = @books.created_today
+    @yesterday_book = @books.created_yesterday
+    @week_book = @books.created_week
+    @week_ago_book = @books.created_week_ago
     @book = Book.new
   end
 

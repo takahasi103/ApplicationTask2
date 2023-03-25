@@ -23,4 +23,14 @@ class Book < ApplicationRecord
       @book = Book.all
     end
   end
+  
+  #投稿数取得
+  #今日
+  scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
+  #昨日
+  scope :created_yesterday, -> { where(created_at: Time.zone.yesterday.all_day) }
+  #今週
+  scope :created_week, -> { where(created_at: Time.current.all_week) }
+  #先週
+  scope :created_week_ago, -> { where(created_at: Time.current.last_week.all_week) }
 end

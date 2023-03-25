@@ -9,6 +9,61 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
+      <h3>投稿数の前日比・前週比</h3>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>今日の投稿数</th>
+            <th>前日の投稿数</th>
+            <th>前日比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @today_book.count %>
+            </td>
+            <td>
+              <%= @yesterday_book.count %>
+            </td>
+            <td> <!-- 1÷0は出来ないから前日の投稿数が0の時は計算しない -->
+              <% if @yesterday_book.count == 0 %>
+                前日の投稿はありません
+              <% else %>
+                <% @the_day_before_ratio = @today_book.count / @yesterday_book.count.to_f %>
+                <%= (@the_day_before_ratio*100).round %> 
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>今週の投稿数</th>
+            <th>前週の投稿数</th>
+            <th>前週比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @week_book.count %>
+            </td>
+            <td>
+              <%= @week_ago_book.count %>
+            </td>
+            <td> <!-- 1÷0は出来ないから先週の投稿数が0の時は計算しない -->
+              <% if @week_ago_book.count == 0 %>
+                前日の投稿はありません
+              <% else %>
+                <% @the_week_before_ratio = @week_book.count / @week_ago_book.count.to_f %>
+                <%= (@the_week_before_ratio*100).round %>%
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
