@@ -31,7 +31,7 @@
                 前日の投稿はありません
               <% else %>
                 <% @the_day_before_ratio = @today_book.count / @yesterday_book.count.to_f %>
-                <%= (@the_day_before_ratio*100).round %> 
+                <%= (@the_day_before_ratio*100).round %>%
               <% end %>
             </td>
           </tr>
@@ -60,6 +60,45 @@
                 <% @the_week_before_ratio = @week_book.count / @week_ago_book.count.to_f %>
                 <%= (@the_week_before_ratio*100).round %>%
               <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>7日間分の投稿数</h3>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>6日前</th>
+            <th>5日前</th>
+            <th>4日前</th>
+            <th>3日前</th>
+            <th>2日前</th>
+            <th>1日前</th>
+            <th>今日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @days6_ago.count %>
+            </td>
+            <td>
+              <%= @days5_ago.count %>
+            </td>
+            <td>
+              <%= @days4_ago.count %>
+            </td>
+            <td>
+              <%= @days3_ago.count %>
+            </td>
+            <td>
+              <%= @days2_ago.count %>
+            </td>
+            <td>
+              <%= @yesterday_book.count %>
+            </td>
+            <td>
+              <%= @today_book.count %>
             </td>
           </tr>
         </tbody>
