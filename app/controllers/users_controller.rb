@@ -22,11 +22,6 @@ class UsersController < ApplicationController
     @books = @user.books
     @today_book = @books.created_today
     @yesterday_book = @books.created_yesterday
-    @days2_ago = @books.created_2_days_ago
-    @days3_ago = @books.created_3_days_ago
-    @days4_ago = @books.created_4_days_ago
-    @days5_ago = @books.created_5_days_ago
-    @days6_ago = @books.created_6_days_ago
     @week_book = @books.created_week
     @week_ago_book = @books.created_week_ago
     @book = Book.new

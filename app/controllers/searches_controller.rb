@@ -9,5 +9,10 @@ class SearchesController < ApplicationController
     else
       @books = Book.looks(params[:search], params[:word])
     end 
-  end 
+  end
+  
+  def postsearch
+    @postbooks = Book.looks(params[:created_at])
+  end
+  
 end
