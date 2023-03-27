@@ -12,7 +12,8 @@ class SearchesController < ApplicationController
   end
   
   def postsearch
-    @postbooks = Book.looks(params[:created_at])
+    @books = Book.all
+    @postbooks = @books.where(created_at: params[:created_at].in_time_zone.all_day)
   end
   
 end
