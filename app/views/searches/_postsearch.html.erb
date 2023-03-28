@@ -1,0 +1,21 @@
+<h4>検索結果</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>投稿数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <% if @postbooks == nil %>
+                <td>
+                    0
+                </td>
+            <% else %>
+                <td>
+                    <%= @postbooks.count %>
+                </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
