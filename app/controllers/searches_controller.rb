@@ -13,7 +13,7 @@ class SearchesController < ApplicationController
   
   def postsearch
     @books = Book.all
-    @postbooks = @books.where(created_at: params[:created_at].in_time_zone.all_day)
+    @postbooks = @books.where(created_at: params[:created_at].in_time_zone.all_day, user_id: params[:user_id])
   end
   
 end

@@ -1,5 +1,1 @@
-$(function(message) {
-        let message_content = (<%= @postbooks.count %>)
-        var html = `<div class="action">${message_content}</div>`
-        $("#search-results").append(html)
-    })
+$("#search-results").html("<%= j(render'searches/postsearch', postbooks: @postbooks) %>");
