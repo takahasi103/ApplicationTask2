@@ -58,6 +58,18 @@ class GroupsController < ApplicationController
     end
   end
   
+  def new_mail #グループメール
+    @group = Group.find(params[:group_id])
+  end
+  
+  def send_mail #送信内容を受け取りEventMailerのsend_mailアクションへ渡す
+    @gorup = Group.find(params[:group_id])
+    group_users = params[:group_users]
+    @mail_title = params[:mail_title]
+    @mail_content = params[:mail_content]
+    EventMailer.send_mail(@mail_title, @mail_content, group_users).delivery_method
+  end
+  
   private
   
   def group_params
