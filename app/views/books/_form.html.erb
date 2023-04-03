@@ -7,17 +7,17 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
-  <div class="form-group row" id="post_raty">
-    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
-    <%= f.hidden_field :star, id: :review_star %>
-  </div>
-  <script>
+  <div id="post_raty"></div>
+  <script src="raty.js">
     let elem = document.querySelector('#post_raty');
     let opt = {  
       size : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      scoreName: 'comment[star]',
+      number: function() {
+        return 3;
+      }
+      score: function() {
+        return 2 * 2;
+      }
       half: false
     };
     raty(elem,opt);
