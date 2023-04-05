@@ -7,13 +7,14 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
-  <div id="post_raty"></div>
+  <div id="post_raty">評価:</div>
   <script>
     let elem = document.querySelector('#post_raty');
     let opt = {  
       size : 36,
-      starOff: 'star-off.png',
-      starOn: 'star-on.png',
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      scoreName: 'book[score]',
     };
     raty(elem,opt);
   </script>

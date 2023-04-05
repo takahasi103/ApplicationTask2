@@ -9,12 +9,17 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import jQuery from "jquery"
 import "popper.js"
+import 'jquery'
+import Raty from "raty.js"
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
 import "bootstrap"
 
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application"
-window.$ = window.jQuery = require('jquery');
-require('packs/raty')
 
 Rails.start()
 Turbolinks.start()

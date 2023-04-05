@@ -21,6 +21,19 @@
             <%= render 'favorites/favorite-btn', book: @book %>
           </td>
           <td>コメント数:<%= @book.post_comments.count %></td>
+          <td>
+            <div id="post_raty<% @book.id%>"></div>
+            <script>
+              document.querySelector('#post_raty<% @book.id%>');
+              let opt = {
+                readOnly: true,
+                size: 36,
+                starOff: '<%= asset_path('star-off.png') %>',
+                starOn: '<%= asset_path('star-on.png') %>',
+                score: <%= @book.score %>,
+              };
+            </script>
+          </td>
           <% if current_user == @book.user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', book_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
