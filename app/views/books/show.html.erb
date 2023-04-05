@@ -20,25 +20,30 @@
           <td class="favorite-btn-<%= @book.id %>">
             <%= render 'favorites/favorite-btn', book: @book %>
           </td>
-          <td>コメント数:<%= @book.post_comments.count %></td>
           <td>
-            <div id="post_raty<% @book.id%>"></div>
+            <div id="post_raty<%= @book.id%>"></div>
             <script>
-              document.querySelector('#post_raty<% @book.id%>');
-              let opt = {
+              let elem<%= @book.id %> = document.querySelector('#post_raty<%= @book.id%>');
+              let opt<%= @book.id %> = {
                 readOnly: true,
                 size: 36,
                 starOff: '<%= asset_path('star-off.png') %>',
                 starOn: '<%= asset_path('star-on.png') %>',
                 score: <%= @book.score %>,
               };
+              raty(elem<%= @book.id %>, opt<%= @book.id %>)
             </script>
           </td>
           <% if current_user == @book.user %>
-            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', book_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <td>
+              <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
+              <br>
+              <%= link_to 'Destroy', book_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+            </td>
           <% end %>
           <td>
+            コメント数:<%= @book.post_comments.count %>
+            <br>
             閲覧数:<%= @book.impressionist_count %>
           </td>
         </tr>

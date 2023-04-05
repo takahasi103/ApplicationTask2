@@ -4,7 +4,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +19,20 @@
         <td><%= book.body %></td>
         <td class="favorite-btn-<%= book.id %>">
           <%= render 'favorites/favorite-btn', book: book %>
+        </td>
+        <td>
+          <div id="post_raty<%= book.id%>"></div>
+          <script>
+            let elem<%= book.id %> = document.querySelector('#post_raty<%= book.id%>');
+            let opt<%= book.id %> = {
+              readOnly: true,
+              size: 36,
+              starOff: '<%= asset_path('star-off.png') %>',
+              starOn: '<%= asset_path('star-on.png') %>',
+              score: <%= book.score %>,
+            };
+            raty(elem<%= book.id %>, opt<%= book.id %>)
+          </script>
         </td>
         <td>
           コメント数:<%= book.post_comments.count %>
