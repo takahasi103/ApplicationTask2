@@ -21,6 +21,11 @@
           <%= render 'favorites/favorite-btn', book: book %>
         </td>
         <td>
+          <% book.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %>
+        </td>
+        <td>
           <div id="post_raty<%= book.id%>"></div>
           <script>
             let elem<%= book.id %> = document.querySelector('#post_raty<%= book.id%>');

@@ -20,13 +20,16 @@ class BooksController < ApplicationController
     else
       @books = week_book_favorited
     end 
+    @tag_list = Tag.all
     @book = Book.new
   end
 
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    tag_list = params[:book][:name].split(nil)
     if @book.save
+      @book.save_tag(tag_list)
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
