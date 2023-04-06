@@ -4,7 +4,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
         </td>
         <td>
           <% book.tags.each do |tag| %>
-            <%= tag.name %>
+            <%=link_to tag.name, tag_books_path(tag.id) %>
           <% end %>
         </td>
         <td>

@@ -16,4 +16,12 @@ class SearchesController < ApplicationController
     @postbooks = @books.where(created_at: params[:created_at].in_time_zone.all_day, user_id: params[:user_id])
   end
   
+  def tagsearch
+    @word = params[:word]
+    @tags = Tag.where(name: @word)
+    @tag = @tags
+    @books = @tag.books.all
+    redirect_to tag_books_path(@tag.id)
+  end 
+  
 end

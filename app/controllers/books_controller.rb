@@ -56,7 +56,13 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to books_path
   end
-
+  
+  def search
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @books = @tag.books.all
+  end 
+  
   private
 
   def book_params
