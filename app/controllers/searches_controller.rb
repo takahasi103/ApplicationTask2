@@ -18,10 +18,13 @@ class SearchesController < ApplicationController
   
   def tagsearch
     @word = params[:word]
-    @tags = Tag.where(name: @word)
-    @tag = @tags
-    @books = @tag.books.all
-    redirect_to tag_books_path(@tag.id)
+    if @tag = Tag.find_by(name: @word)
+      @books = @tag.books.all
+      redirect_to tag_books_path(@tag.id)
+    else
+      @books = Book.all
+      redirect_to books_path
+    end 
   end 
   
 end
