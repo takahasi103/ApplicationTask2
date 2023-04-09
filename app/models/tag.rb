@@ -4,7 +4,7 @@ class Tag < ApplicationRecord
   
   scope :merge_books, -> (tags){ }
   
-  def self.search_books_for(content, method)
+  def self.search_books_for(word, methood)
     if method == 'perfect'
       tags = Tag.where(name: word)
     elsif method == 'forward'
